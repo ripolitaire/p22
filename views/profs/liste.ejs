@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des étudiants</title>
+</head>
+<body>
+    <%- include('../partials/navbar'); %>
+
+    <h1>Liste des étudiants</h1>
+
+    <ul>
+        <% etudiants.forEach(function(etudiant) { %>
+            <li>
+                <%= etudiant.nom %> <%= etudiant.prenom %> - <%= etudiant.email %> - <%= etudiant.age %> ans
+            </li>
+        <% }) %>
+    </ul>
+
+   
+    <!-- Affichage des etudiants dans un tableau avec les buttons : supprimer/modifier -->
+     <h1>Liste des étudiants</h1>
+<a href="/etudiants/ajouter">Ajouter un étudiant</a>
+<table border="1">
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Âge</th>
+        <th>Actions</th>
+    </tr>
+    <% etudiants.forEach(etudiant => { %>
+    <tr>
+        <td><%= etudiant.nom %></td>
+        <td><%= etudiant.prenom %></td>
+        <td><%= etudiant.email %></td>
+        <td><%= etudiant.age %></td>
+        <td>
+            <a href="/etudiants/modifier/<%= etudiant._id %>">Modifier</a>
+            <form action="/etudiants/supprimer/<%= etudiant._id %>" method="POST" style="display:inline;">
+                <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer ?')">Supprimer</button>
+            </form>
+        </td>
+    </tr>
+    <% }) %>
+</table>
+
+</body>
+</html>
